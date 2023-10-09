@@ -19,7 +19,7 @@ function StudentScreen() {
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
-        headerStyle: { backgroundColor: "#fff" },
+        headerStyle: { backgroundColor: colors.primary30 },
         headerTintColor: "white",
         tabBarStyle: { backgroundColor: colors.primary30 },
         tabBarActiveTintColor: "#fff",
@@ -82,6 +82,11 @@ export default function App() {
           <Stack.Screen
             name="StudentScreen"
             component={StudentScreen}
+            options={{ presentation: "modal", headerShown: false }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
             options={{ presentation: "modal", headerShown: false }}
           />
         </Stack.Navigator>
