@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "28472300188",
+    "project_id": "elcapp-66f08",
+    "storage_bucket": "elcapp-66f08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28472300188:android:f3830975366f27d4495359",
+        "android_client_info": {
+          "package_name": "com.trannhantam4.ELC"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28472300188-59hnbldg86000v3h11n5mcq3ld6uokc5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trannhantam4.ELC",
+            "certificate_hash": "f5b7b6ca1e2a3242084fda7d0cae41f2087e343c"
+          }
+        },
+        {
+          "client_id": "28472300188-lj6cughgsuomd0uag8lsp99c4q33tps5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trannhantam4.ELC",
+            "certificate_hash": "3f422270e927389761be123ab76b97ac378f4e1f"
+          }
+        },
+        {
+          "client_id": "28472300188-e9fcbpk46vojrj1j1flgd04mq6unplk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmOszWdbrsHDJwN8_oCqB5WYJPpfLUsPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28472300188-e9fcbpk46vojrj1j1flgd04mq6unplk2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
