@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -18,10 +18,13 @@ import {
 } from "@react-native-google-signin/google-signin";
 import auth from "@react-native-firebase/auth";
 import Login from "./screens/Login";
+import { firebase } from "@react-native-firebase/auth";
+import Info from "./screens/Info";
 const Stack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 function StudentScreen() {
+  const user = firebase.auth().currentUser;
   async function onSignOutPress() {
     try {
       await auth().signOut();
@@ -38,14 +41,16 @@ function StudentScreen() {
         tabBarActiveTintColor: "#fff",
         tabBarInactiveTintColor: colors.primary10,
         headerRight: ({ tintColor }) => (
-          <IconButton
-            icon="add"
-            size={24}
-            color={tintColor}
+          <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Settings");
+              navigation.navigate("Info");
             }}
-          />
+          >
+            <Image
+              style={{ width: 30, height: 30, margin: 24 }}
+              source={{ uri: user.photoURL }}
+            />
+          </TouchableOpacity>
         ),
         headerLeft: ({ tintColor }) => (
           <IconButton
@@ -154,6 +159,11 @@ export default function App() {
           <Stack.Screen
             name="Settings"
             component={Settings}
+            options={{ presentation: "modal", headerShown: false }}
+          />
+          <Stack.Screen
+            name="Info"
+            component={Info}
             options={{ presentation: "modal", headerShown: false }}
           />
         </Stack.Navigator>

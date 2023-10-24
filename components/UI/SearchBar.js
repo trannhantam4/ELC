@@ -18,7 +18,7 @@ export default function SearchBar() {
   return (
     <View style={styles.screen}>
       <TextInput style={styles.input}></TextInput>
-      <IconButton icon="search" size={30} color={colors.primary60} />
+      <IconButton icon="search" size={width * 0.075} color={colors.primary60} />
     </View>
   );
 }
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     height: height * 0.07,
-    margin: 24,
+    marginTop: 24,
   },
   input: {
     backgroundColor: colors.shadow,
     borderRadius: 16,
-    width: "75%",
+    width: "80%",
     height: "100%",
-    padding: 12,
+    padding: 10,
     color: colors.primary60,
     fontWeight: "bold",
     fontSize: 16,
