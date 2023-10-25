@@ -1,16 +1,17 @@
 import axios from "axios";
 //NOT YET UPDATED URL
-const BACKEND_URL = "https://cart-like-a99e2-default-rtdb.firebaseio.com";
+const BACKEND_URL =
+  "https://elcapp-66f08-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
 //NOT YET UPDATE FUNCTIONS
-export async function fetchExpense(user) {
+export async function fetchStudent(user) {
   try {
-    const response = await axios.get(BACKEND_URL + "/expenses.json");
-    const expenses = [];
+    const response = await axios.get(BACKEND_URL + "/students.json");
+    const students = [];
     const email = user.email;
 
     for (const key in response.data) {
-      const expenseObj = {
+      const studentObj = {
         id: key,
         date: new Date(response.data[key].date),
         des: response.data[key].des,
@@ -19,29 +20,29 @@ export async function fetchExpense(user) {
         type: response.data[key].type,
       };
 
-      if (!email || expenseObj.user === email) {
-        expenses.push(expenseObj);
+      if (!email || studentObj.user === email) {
+        students.push(studentObj);
       }
     }
 
-    expenses.sort((a, b) => a.date - b.date);
-    return expenses;
+    students.sort((a, b) => a.date - b.date);
+    return students;
   } catch (error) {
-    console.error("Error fetching expenses:", error);
+    console.error("Error fetching students:", error);
     throw error;
   }
 }
-export async function storeExpense(expenseData) {
+export async function storeStudent(studentData) {
   const response = await axios.post(
-    BACKEND_URL + "/expenses.json",
-    expenseData
+    BACKEND_URL + "/students.json",
+    studentData
   );
   const id = response.data.name;
   return id;
 }
-export function updateExpense(id, expenseData) {
-  return axios.put(BACKEND_URL + `/expenses/${id}.json`, expenseData);
+export function updateStudent(id, studentData) {
+  return axios.put(BACKEND_URL + `/students/${id}.json`, studentData);
 }
-export function deleteExpense(id) {
-  return axios.delete(BACKEND_URL + `/expenses/${id}.json`);
+export function deleteStudent(id) {
+  return axios.delete(BACKEND_URL + `/students/${id}.json`);
 }

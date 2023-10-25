@@ -9,8 +9,13 @@ import {
   Keyboard,
 } from "react-native";
 import SearchBar from "../components/UI/SearchBar";
-
+import Button from "../components/UI/Button";
+import { useNavigation } from "@react-navigation/native";
 export default function Home() {
+  const navigation = useNavigation();
+  const NavigateManageScreen = () => {
+    navigation.navigate("ManageScreen");
+  };
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -19,7 +24,8 @@ export default function Home() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.screen}>
           <SearchBar />
-          <Text>Home</Text>
+
+          <Button onPress={NavigateManageScreen}>Add</Button>
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

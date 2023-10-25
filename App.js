@@ -20,6 +20,22 @@ import auth from "@react-native-firebase/auth";
 import Login from "./screens/Login";
 import { firebase } from "@react-native-firebase/auth";
 import Info from "./screens/Info";
+import StudentsContextProvider from "./store/student-context";
+const firebaseConfig = {
+  apiKey: "AIzaSyDrTya50T9W5mIHm0jlcOhDRDNyZQJBrk0",
+  authDomain: "elcapp-66f08.firebaseapp.com",
+  databaseURL:
+    "https://elcapp-66f08-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "elcapp-66f08",
+  storageBucket: "elcapp-66f08.appspot.com",
+  messagingSenderId: "28472300188",
+  appId: "1:28472300188:web:05fabb72f3031567495359",
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const Stack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -138,36 +154,38 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="StudentScreen"
-          screenOptions={{
-            headerStyle: { backgroundColor: "#fff" },
-            headerTintColor: "white",
-          }}
-        >
-          <Stack.Screen
-            name="ManageScreen"
-            component={ManageScreen}
-            options={{ presentation: "modal", headerShown: false }}
-          />
-          <Stack.Screen
-            name="StudentScreen"
-            component={StudentScreen}
-            options={{ presentation: "modal", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Settings"
-            component={Settings}
-            options={{ presentation: "modal", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Info"
-            component={Info}
-            options={{ presentation: "modal", headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <StudentsContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="StudentScreen"
+            screenOptions={{
+              headerStyle: { backgroundColor: "#fff" },
+              headerTintColor: "white",
+            }}
+          >
+            <Stack.Screen
+              name="ManageScreen"
+              component={ManageScreen}
+              options={{ presentation: "modal", headerShown: false }}
+            />
+            <Stack.Screen
+              name="StudentScreen"
+              component={StudentScreen}
+              options={{ presentation: "modal", headerShown: false }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={Settings}
+              options={{ presentation: "modal", headerShown: false }}
+            />
+            <Stack.Screen
+              name="Info"
+              component={Info}
+              options={{ presentation: "modal", headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </StudentsContextProvider>
     </>
   );
 }

@@ -33,7 +33,7 @@ function StudentsReducer(state, action) {
 }
 
 function StudentsContextProvider({ children }) {
-  const [studentsState, dispatch] = useReducer(studentsReducer, []);
+  const [studentsState, dispatch] = useReducer(StudentsReducer, []);
 
   function addStudent(studentData) {
     dispatch({ type: "ADD", payload: studentData });
