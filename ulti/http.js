@@ -14,10 +14,11 @@ export async function fetchStudent(user) {
       const studentObj = {
         id: key,
         date: new Date(response.data[key].date),
-        des: response.data[key].des,
-        price: response.data[key].price,
-        user: response.data[key].user,
-        type: response.data[key].type,
+        name: response.data[key].name,
+        DoB: response.data[key].DoB,
+        classes: response.data[key].classes,
+        lastModifiedBy: response.data[key].lastModifiedBy,
+        parentEmail: response.data[key].parentEmail,
       };
 
       if (!email || studentObj.user === email) {

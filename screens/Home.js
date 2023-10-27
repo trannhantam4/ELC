@@ -24,7 +24,6 @@ export default function Home() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.screen}>
           <SearchBar />
-
           <Button onPress={NavigateManageScreen}>Add</Button>
         </View>
       </TouchableWithoutFeedback>

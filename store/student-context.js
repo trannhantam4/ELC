@@ -2,10 +2,13 @@ import { createContext, useReducer, useState } from "react";
 //NEED TO BE CHECKED
 export const StudentsContext = createContext({
   students: [],
-  addStudent: ({ des, price, date, user, type }) => {},
+  addStudent: ({ name, DoB, date, classes, lastModifiedBy, parentEmail }) => {},
   deleteStudent: (id) => {},
   setStudent: (students) => {},
-  updateStudent: (id, { des, price, date, user, type }) => {},
+  updateStudent: (
+    id,
+    { name, DoB, date, classes, LastModifiedBy, parentEmail }
+  ) => {},
 });
 
 function StudentsReducer(state, action) {

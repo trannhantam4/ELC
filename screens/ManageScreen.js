@@ -6,6 +6,7 @@ import LoadingOverlay from "../components/UI/LoadingOverLay";
 import { firebase } from "@react-native-firebase/auth";
 import IconButton from "../components/UI/IconButton";
 import { colors } from "../constant/style";
+import StudentForm from "../components/UI/StudentForm";
 const ManageScreen = ({ route, navigation }) => {
   const [isSubmiting, setIsSubmiting] = useState(false);
   const user = firebase.auth().currentUser;
@@ -32,15 +33,15 @@ const ManageScreen = ({ route, navigation }) => {
   }
   //unEdit
   //unEdit
-  async function confirmHandler(expenseData) {
+  async function confirmHandler(studentData) {
     if (isEditing) {
       setIsSubmiting(true);
-      expenseCtx.updateExpense(id, expenseData);
-      await updateExpense(id, expenseData);
+      studentCtx.updateExpense(id, studentData);
+      await updateExpense(id, studentData);
     } else {
       setIsSubmiting(true);
-      const id = await storeExpense(expenseData);
-      expenseCtx.addExpense({ ...expenseData, id: id });
+      const id = await storeExpense(studentData);
+      studentCtx.addExpense({ ...studentData, id: id });
     }
     navigation.goBack();
   }
@@ -53,13 +54,13 @@ const ManageScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <ExpenseForm
+      <StudentForm
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
         submitLabel={isEditing ? "Update" : "Add"}
-        defaultValue={selectedExpense}
-      /> */}
-      <Text>ManageScreen</Text>
+        defaultValue={selectedStudent}
+      />
+
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
