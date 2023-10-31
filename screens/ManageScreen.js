@@ -36,12 +36,12 @@ const ManageScreen = ({ route, navigation }) => {
   async function confirmHandler(studentData) {
     if (isEditing) {
       setIsSubmiting(true);
-      studentCtx.updateExpense(id, studentData);
-      await updateExpense(id, studentData);
+      studentCtx.updateStudent(id, studentData);
+      await updateStudent(id, studentData);
     } else {
       setIsSubmiting(true);
-      const id = await storeExpense(studentData);
-      studentCtx.addExpense({ ...studentData, id: id });
+      const id = await storeStudent(studentData);
+      studentCtx.addStudent({ ...studentData, id: id });
     }
     navigation.goBack();
   }

@@ -50,28 +50,29 @@ export default function StudentForm({
 
   function submitHandler() {
     // Remove dots or commas from the price input and parse it as a float
-    const formattedPrice = input.price.replace(/[.,]/g, "");
+    // const formattedPrice = input.price.replace(/[.,]/g, "");
     const studentData = {
       // for tuition
       // price: parseFloat(formattedPrice),
       name: input.name,
+      DoB: input.DoB,
       classes: input.classes,
       date: selectedDate,
       lastModifiedBy: input.lastModifiedBy,
       parentEmail: input.parentEmail,
     };
 
-    const priceIsValid = !isNaN(studentData.price) && studentData.price > 0;
-    const desIsValid = studentData.des.trim().length > 0;
+    // const priceIsValid = !isNaN(studentData.price) && studentData.price > 0;
+    // const desIsValid = studentData.des.trim().length > 0;
 
-    if (!priceIsValid) {
-      Alert.alert("Invalid price!!", "Please check your price");
-      return;
-    }
-    if (!desIsValid) {
-      Alert.alert("Invalid des!!", "Please check your des");
-      return;
-    }
+    // if (!priceIsValid) {
+    //   Alert.alert("Invalid price!!", "Please check your price");
+    //   return;
+    // }
+    // if (!desIsValid) {
+    //   Alert.alert("Invalid des!!", "Please check your des");
+    //   return;
+    // }
     onSubmit(studentData);
   }
 
@@ -98,6 +99,30 @@ export default function StudentForm({
       setShowDatePicker(false);
     }
   };
+  function formatDateString(inputDate) {
+    // Remove any existing hyphens
+    const cleanedDate = inputDate.replace(/-/g, "");
+
+    // Check if the cleaned date has at least 2 characters
+    if (cleanedDate.length >= 2) {
+      // Insert hyphens at the appropriate positions
+      let formattedDate = cleanedDate.slice(0, 2) + "-";
+
+      if (cleanedDate.length >= 4) {
+        formattedDate += cleanedDate.slice(2, 4) + "-";
+      }
+
+      // Add the year part if available
+      if (cleanedDate.length > 4) {
+        formattedDate += cleanedDate.slice(4);
+      }
+
+      return formattedDate;
+    }
+
+    // If there are less than 2 characters, return the cleaned date
+    return cleanedDate;
+  }
 
   return (
     <KeyboardAvoidingView
@@ -163,7 +188,7 @@ export default function StudentForm({
                 autoCapitalize: "words",
                 onChangeText: inputChangeHandler.bind(this, "DoB"),
                 value: input.DoB,
-                placeholder: "name of thing(s) or anything",
+                placeholder: "Date of Birth",
               }}
             />
             <Input
@@ -175,6 +200,17 @@ export default function StudentForm({
                 onChangeText: inputChangeHandler.bind(this, "classes"),
                 value: input.classes,
                 placeholder: "Student's Class",
+              }}
+            />
+            <Input
+              label="Parent's email"
+              textInputConfig={{
+                multiLine: false,
+                autoCorrect: true,
+                autoCapitalize: "words",
+                onChangeText: inputChangeHandler.bind(this, "parentEmail"),
+                value: input.parentEmail,
+                placeholder: "Parent's email",
               }}
             />
             <Text style={styles.label}>

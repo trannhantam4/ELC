@@ -2,11 +2,11 @@ import { View, Text, StyleSheet, TextInput, Dimensions } from "react-native";
 import React from "react";
 const { width, height } = Dimensions.get("window");
 import { colors } from "../../constant/style";
-export default function Input({ label, value }) {
+export default function Input({ label, value, textInputConfig }) {
   return (
     <View>
       <Text style={styles.label}>{label}:</Text>
-      <TextInput style={styles.input} value={value}></TextInput>
+      <TextInput style={styles.input} {...textInputConfig}></TextInput>
     </View>
   );
 }
