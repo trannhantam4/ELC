@@ -62,17 +62,17 @@ export default function StudentForm({
       parentEmail: input.parentEmail,
     };
 
-    // const priceIsValid = !isNaN(studentData.price) && studentData.price > 0;
-    // const desIsValid = studentData.des.trim().length > 0;
+    const nameIsValid = studentData.name.length > 0;
+    const DoBIsValid = studentData.DoB.length > 0;
 
-    // if (!priceIsValid) {
-    //   Alert.alert("Invalid price!!", "Please check your price");
-    //   return;
-    // }
-    // if (!desIsValid) {
-    //   Alert.alert("Invalid des!!", "Please check your des");
-    //   return;
-    // }
+    if (!nameIsValid) {
+      Alert.alert("Invalid name!!", "Please check your name");
+      return;
+    }
+    if (!DoBIsValid) {
+      Alert.alert("Invalid Date of birth!!", "Please check your date");
+      return;
+    }
     onSubmit(studentData);
   }
 
@@ -146,7 +146,7 @@ export default function StudentForm({
               /> */}
 
               <Text style={styles.label} adjustsFontSizeToFit>
-                Date: {getDateFormat(selectedDate)}
+                Today is: {getDateFormat(selectedDate)}
               </Text>
               {/* <Button
                   style={styles.button}
@@ -214,7 +214,7 @@ export default function StudentForm({
               }}
             />
             <Text style={styles.label}>
-              Last Modifier: {input.lastModifiedBy}
+              Last modified by: {input.lastModifiedBy}
             </Text>
             <View style={styles.buttonContainer}>
               <Button style={styles.button} mode="flat" onPress={onCancel}>

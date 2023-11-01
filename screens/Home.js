@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,14 +8,44 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import { firebase } from "@react-native-firebase/auth";
 import SearchBar from "../components/UI/SearchBar";
 import Button from "../components/UI/Button";
 import { useNavigation } from "@react-navigation/native";
+import { StudentsContext } from "../store/student-context";
+import { fetchStudent } from "../ulti/http";
+import List from "../components/List/List";
 export default function Home() {
+  const user = firebase.auth().currentUser;
+  const studentsCtx = useContext(StudentsContext);
+  const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState("");
   const navigation = useNavigation();
   const NavigateManageScreen = () => {
     navigation.navigate("ManageScreen");
   };
+  const [search, setSearch] = useState("");
+  const updateSearch = (newSearch) => {
+    setSearch(newSearch);
+  };
+  useEffect(() => {
+    async function getStudents() {
+      setIsFetching(true);
+      try {
+        const students = await fetchStudent();
+        studentsCtx.setStudents(students);
+      } catch (error) {
+        console.log(error);
+        setError("Could not fetch data");
+      }
+
+      setIsFetching(false);
+    }
+
+    getStudents();
+  }, []);
+  const students = studentsCtx.students;
+  console.log(students);
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -23,8 +53,9 @@ export default function Home() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.screen}>
-          <SearchBar />
+          <SearchBar search={search} onUpdateSearch={updateSearch} />
           <Button onPress={NavigateManageScreen}>Add</Button>
+          <List students={students} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -33,7 +64,8 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: { width: "100%", height: "100%" },
   screen: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
     alignItems: "center",
     backgroundColor: "white",
   },

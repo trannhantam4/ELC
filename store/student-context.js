@@ -4,14 +4,14 @@ export const StudentsContext = createContext({
   students: [],
   addStudent: ({ name, DoB, date, classes, lastModifiedBy, parentEmail }) => {},
   deleteStudent: (id) => {},
-  setStudent: (students) => {},
+  setStudents: (students) => {},
   updateStudent: (
     id,
     { name, DoB, date, classes, LastModifiedBy, parentEmail }
   ) => {},
 });
 
-function StudentsReducer(state, action) {
+function studentsReducer(state, action) {
   switch (action.type) {
     case "ADD":
       return [action.payload, ...state];
@@ -36,12 +36,12 @@ function StudentsReducer(state, action) {
 }
 
 function StudentsContextProvider({ children }) {
-  const [studentsState, dispatch] = useReducer(StudentsReducer, []);
+  const [studentsState, dispatch] = useReducer(studentsReducer, []);
 
   function addStudent(studentData) {
     dispatch({ type: "ADD", payload: studentData });
   }
-  function setStudent(students) {
+  function setStudents(students) {
     dispatch({ type: "SET", payload: students });
   }
   function deleteStudent(id) {
@@ -53,7 +53,7 @@ function StudentsContextProvider({ children }) {
   const value = {
     students: studentsState,
     addStudent: addStudent,
-    setStudent: setStudent,
+    setStudents: setStudents,
     deleteStudent: deleteStudent,
     updateStudent: updateStudent,
   };
