@@ -24,15 +24,19 @@ export default function Home() {
   const NavigateManageScreen = () => {
     navigation.navigate("ManageScreen");
   };
+  const [isPressed, setIsPressed] = useState(false);
   const [search, setSearch] = useState("");
   const updateSearch = (newSearch) => {
     setSearch(newSearch);
+    setIsPressed(true);
   };
+
   useEffect(() => {
+    // Define getStudents function inside the useEffect
     async function getStudents() {
       setIsFetching(true);
       try {
-        const students = await fetchStudent();
+        const students = await fetchStudent(search);
         studentsCtx.setStudents(students);
       } catch (error) {
         console.log(error);
@@ -42,8 +46,12 @@ export default function Home() {
       setIsFetching(false);
     }
 
+    // Call getStudents when search or other relevant dependencies change
+
     getStudents();
-  }, []);
+    setIsPressed(false);
+  }, [search, isPressed]);
+
   const students = studentsCtx.students;
   console.log(students);
   return (
@@ -53,7 +61,11 @@ export default function Home() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.screen}>
-          <SearchBar search={search} onUpdateSearch={updateSearch} />
+          <SearchBar
+            search={search}
+            onUpdateSearch={updateSearch}
+            getStudents={() => setIsPressed(true)}
+          />
           <Button onPress={NavigateManageScreen}>Add</Button>
           <List students={students} />
         </View>

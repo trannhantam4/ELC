@@ -4,7 +4,7 @@ const BACKEND_URL =
   "https://elcapp-66f08-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
 //NOT YET UPDATE FUNCTIONS
-export async function fetchStudent() {
+export async function fetchStudent(search) {
   try {
     const response = await axios.get(BACKEND_URL + "/students.json");
     const students = [];
@@ -19,7 +19,9 @@ export async function fetchStudent() {
         lastModifiedBy: response.data[key].lastModifiedBy,
         parentEmail: response.data[key].parentEmail,
       };
-      students.push(studentObj);
+      if (!search || studentObj.name.toLowerCase(0).includes(search)) {
+        students.push(studentObj);
+      }
     }
     return students;
   } catch (error) {

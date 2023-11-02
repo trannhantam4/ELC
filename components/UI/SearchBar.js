@@ -14,7 +14,7 @@ import { TextInput } from "react-native-gesture-handler";
 import IconButton from "./IconButton";
 import { colors } from "../../constant/style";
 const { height, width } = Dimensions.get("screen");
-export default function SearchBar({ search, onUpdateSearch }) {
+export default function SearchBar({ search, onUpdateSearch, getStudents }) {
   return (
     <View style={styles.screen}>
       <TextInput
@@ -24,7 +24,12 @@ export default function SearchBar({ search, onUpdateSearch }) {
           onUpdateSearch(text); // Call the callback to update the search in Home
         }}
       ></TextInput>
-      <IconButton icon="search" size={width * 0.075} color={colors.primary60} />
+      <IconButton
+        icon="search"
+        size={width * 0.075}
+        color={colors.primary60}
+        onPress={getStudents}
+      />
     </View>
   );
 }

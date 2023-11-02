@@ -188,7 +188,8 @@ export default function StudentForm({
                 autoCapitalize: "words",
                 onChangeText: inputChangeHandler.bind(this, "DoB"),
                 value: input.DoB,
-                placeholder: "Date of Birth",
+                keyboardType: "number-pad",
+                placeholder: "DD-MM-YYYY",
               }}
             />
             <Input
@@ -200,6 +201,28 @@ export default function StudentForm({
                 onChangeText: inputChangeHandler.bind(this, "classes"),
                 value: input.classes,
                 placeholder: "Student's Class",
+              }}
+            />
+            <Input
+              label="Parent's email"
+              textInputConfig={{
+                multiLine: false,
+                autoCorrect: true,
+                autoCapitalize: "words",
+                onChangeText: inputChangeHandler.bind(this, "parentEmail"),
+                value: input.parentEmail,
+                placeholder: "Parent's email",
+              }}
+            />
+            <Input
+              label="Parent's email"
+              textInputConfig={{
+                multiLine: false,
+                autoCorrect: true,
+                autoCapitalize: "words",
+                onChangeText: inputChangeHandler.bind(this, "parentEmail"),
+                value: input.parentEmail,
+                placeholder: "Parent's email",
               }}
             />
             <Input
@@ -255,7 +278,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     alignItems: "center",
   },
   button: {
