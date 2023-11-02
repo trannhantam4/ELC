@@ -26,6 +26,8 @@ export default function Home() {
   };
   const [isPressed, setIsPressed] = useState(false);
   const [search, setSearch] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null); // New state for the timeout
+
   const updateSearch = (newSearch) => {
     setSearch(newSearch);
     setIsPressed(true);
@@ -50,7 +52,7 @@ export default function Home() {
 
     getStudents();
     setIsPressed(false);
-  }, [search, isPressed]);
+  }, [isPressed === true]);
 
   const students = studentsCtx.students;
   console.log(students);

@@ -19,7 +19,10 @@ export async function fetchStudent(search) {
         lastModifiedBy: response.data[key].lastModifiedBy,
         parentEmail: response.data[key].parentEmail,
       };
-      if (!search || studentObj.name.toLowerCase(0).includes(search)) {
+      if (
+        !search ||
+        studentObj.name.toLowerCase().includes(search.toLowerCase())
+      ) {
         students.push(studentObj);
       }
     }
