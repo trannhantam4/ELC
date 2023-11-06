@@ -3,10 +3,11 @@ import axios from "axios";
 const BACKEND_URL =
   "https://elcapp-66f08-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
-//NOT YET UPDATE FUNCTIONS
 export async function fetchStudent(search) {
   try {
-    const response = await axios.get(BACKEND_URL + "/students.json");
+    const response = await axios.get(
+      BACKEND_URL + "/students.json?search=${search}"
+    );
     const students = [];
 
     for (const key in response.data) {

@@ -30,30 +30,41 @@ export default function Home() {
 
   const updateSearch = (newSearch) => {
     setSearch(newSearch);
-    setIsPressed(true);
+
+    // Clear any previous timeouts
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
+    // Set a new timeout to trigger the fetch after a delay
+    setSearchTimeout(
+      setTimeout(() => {
+        setIsFetching(true);
+        fetchStudents();
+      }, 1000) // Adjust the delay time as needed
+    );
+  };
+
+  const fetchStudents = async () => {
+    try {
+      const students = await fetchStudent(search);
+      studentsCtx.setStudents(students);
+    } catch (error) {
+      console.log(error);
+      setError("Could not fetch data");
+    }
+
+    setIsFetching(false);
   };
 
   useEffect(() => {
-    // Define getStudents function inside the useEffect
-    async function getStudents() {
+    // This effect will run when search changes and the timeout is triggered.
+    // It fetches the data if the timeout occurs or at least three characters are entered.
+    if (search.length >= 3) {
       setIsFetching(true);
-      try {
-        const students = await fetchStudent(search);
-        studentsCtx.setStudents(students);
-      } catch (error) {
-        console.log(error);
-        setError("Could not fetch data");
-      }
-
-      setIsFetching(false);
+      fetchStudents();
     }
-
-    // Call getStudents when search or other relevant dependencies change
-
-    getStudents();
-    setIsPressed(false);
-  }, [isPressed === true]);
-
+  }, [search]);
   const students = studentsCtx.students;
   console.log(students);
   return (
