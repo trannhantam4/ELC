@@ -27,14 +27,21 @@ export default function StudentForm({
   defaultValue,
 }) {
   const [input, setInput] = useState({
-    name: defaultValue ? defaultValue.name.toString() : "",
-    DoB: defaultValue ? defaultValue.DoB.toString() : "",
-    date: defaultValue ? defaultValue.date.toString() : "",
-    classes: defaultValue ? defaultValue.classes.toString() : "",
-    lastModifiedBy: defaultValue
-      ? defaultValue.lastModifiedBy.toString()
-      : firebase.auth().currentUser.email.toString(),
-    parentEmail: defaultValue ? defaultValue.parentEmail.toString() : "",
+    name: defaultValue && defaultValue.name ? defaultValue.name.toString() : "",
+    DoB: defaultValue && defaultValue.DoB ? defaultValue.DoB.toString() : "",
+    date: defaultValue && defaultValue.date ? defaultValue.date.toString() : "",
+    classes:
+      defaultValue && defaultValue.classes
+        ? defaultValue.classes.toString()
+        : "",
+    lastModifiedBy:
+      defaultValue && defaultValue.lastModifiedBy
+        ? defaultValue.lastModifiedBy.toString()
+        : firebase.auth().currentUser.email.toString(),
+    parentEmail:
+      defaultValue && defaultValue.parentEmail
+        ? defaultValue.parentEmail.toString()
+        : "",
   });
   const [selectedDate, setSelectedDate] = useState(
     defaultValue ? new Date(defaultValue.date) : new Date()
@@ -204,7 +211,7 @@ export default function StudentForm({
               }}
             />
             <Input
-              label="Parent's email"
+              label="Placement result"
               textInputConfig={{
                 multiLine: false,
                 autoCorrect: true,
@@ -215,7 +222,7 @@ export default function StudentForm({
               }}
             />
             <Input
-              label="Parent's email"
+              label="Previous class result"
               textInputConfig={{
                 multiLine: false,
                 autoCorrect: true,
